@@ -1,36 +1,72 @@
-<form>
+<form name="prequalifyController.myForm" ng-submit="prequalifyController.submitForm()" novalidate>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="firstName">
+    <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.firstName.$error.required && prequalifyController.formSubmitted">
+      Please enter your first name
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="lastName">
+    <input type="text" class="form-control" placeholder="lastName" name="lastName" ng-model="prequalifyController.userInfo.lastName" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.lastName.$error.required && prequalifyController.formSubmitted">
+      Please enter your last name
+    </span>
   </div>
   <div class="form-group">
-    <input type="email" class="form-control" placeholder="Email">
+    <input type="email" class="form-control" placeholder="Email" name="email" ng-model="prequalifyController.userInfo.email" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.email.$error.required && prequalifyController.formSubmitted">
+      Please enter your email address
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="businessName">
+    <input type="text" class="form-control" placeholder="businessName" name="businessName" ng-model="prequalifyController.userInfo.businessName" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.businessName.$error.required && prequalifyController.formSubmitted">
+      Please enter your business name
+    </span>
   </div>
   <div class="form-group">
-    <input type="tel" class="form-control" placeholder="telephoneNumber">
+    <input type="tel" class="form-control" placeholder="phoneNumber" name="phoneNumber" ng-model="prequalifyController.userInfo.phoneNumber" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.phoneNumber.$error.required && prequalifyController.formSubmitted">
+      Please enter your phone number
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="yearStarted">
+    <input type="text" class="form-control" placeholder="yearStarted" name="yearStarted" ng-model="prequalifyController.userInfo.yearStarted" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.yearStarted.$error.required && prequalifyController.formSubmitted">
+      Please enter year started 
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="estimatedFICO">
+    <input type="text" class="form-control" placeholder="estimatedFICO" name="estimatedFICO" ng-model="prequalifyController.userInfo.estimatedFICO" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.estimatedFICO.$error.required && prequalifyController.formSubmitted">
+      Please enter estimatedFICO
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="estimatedAnnualRevenue">
+    <input type="text" class="form-control" placeholder="estimatedAnnualRevenue" name="estimatedAnnualRevenue" ng-model="prequalifyController.userInfo.estimatedAnnualRevenue" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.estimatedAnnualRevenue.$error.required && prequalifyController.formSubmitted">
+      Please enter estimatedAnnualRevenue
+    </span>
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="grossPercentageFromCards">
+    <input type="text" class="form-control" placeholder="grossPercentageFromCards" name="grossPercentageFromCards" ng-model="prequalifyController.userInfo.grossPercentageFromCards" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.grossPercentageFromCards.$error.required && prequalifyController.formSubmitted">
+      Please enter grossPercentageFromCards
+    </span>
   </div>
-  <select name="typeOfBusiness">
-    <option value="value1">Value 1</option>
-    <option value="value2">Value 2</option>
+  <select class="form-control" name="typeOfBusiness" ng-model="prequalifyController.userInfo.typeOfBusiness" required>
+    <option ng-repeat="option in prequalifyController.typeOfBusinessArr">
+      {{option}}
+    </option>
   </select>
+  <span style="color: red" ng-show="prequalifyController.myForm.typeOfBusiness.$error.required && prequalifyController.formSubmitted">
+    Please enter select a business type
+  </span>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="api_key">
+    <input type="text" class="form-control" placeholder="api_key" name="api_key" ng-model="prequalifyController.userInfo.api_key" required>
+    <span style="color: red" ng-show="prequalifyController.myForm.api_key.$error.required && prequalifyController.formSubmitted">
+      Please enter select your api_key
+    </span>
+  </div>
+  <input type="submit" id="submit" value="Submit" class="form-control"/>
   </div>
 </form>
