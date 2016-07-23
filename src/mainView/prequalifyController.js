@@ -1,18 +1,21 @@
-const annotation = ['$http'];
+const annotation = ['$http', '$state'];
 
 class prequalifyController {
-  constructor($http) {
+  constructor($http, $state) {
     this.$http = $http;
+    this.$state = $state;
     this.formSubmitted = false;
     this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering', 'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline', 'Construction', 'Dentists', 'DryCleaning', 'Equipment', 'Grocery', 'Health', 'HomeRepair', 'Hotels', 'Insurance', 'Janitorial', 'Landscape', 'Optometrists', 'Physicians', 'Restaurants', 'Salons', 'Taxis', 'Trucking', 'Veterinarians'];
   }
 
   successCallback(response) {
     console.log('success', response);
+    this.$state.go('qualified');
   }
 
   errorCallback(response) {
     console.log('error', response);
+    this.$state.go('unqualified');
   }
 
   submitForm() {
@@ -34,11 +37,11 @@ class prequalifyController {
           estimatedFICO: this.userInfo.estimatedFICO,
           estimatedAnnualRevenue: this.userInfo.estimatedAnnualRevenue,
           grossPercentageFromCards: this.userInfo.grossPercentageFromCards,
-          typeOfBusiness: 'Accounting',
+          typeOfBusiness: this.userInfo.typeOfBusiness,
           api_key: this.userInfo.api_key
         }
       }).
-      then(this.successCallback, this.errorCallback);
+      then(this.successCallback.bind(this), this.errorCallback.bind(this));
     }
   }
 

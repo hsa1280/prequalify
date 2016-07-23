@@ -6,7 +6,7 @@ function prequalifyStateProvider($stateProvider) {
             url: '/prequalify',
             views: {
                 'content': {
-                    templateUrl: '/main-view/prequalifyView.html',
+                    templateUrl: '/mainView/prequalifyView.html',
                     controller: 'prequalifyController as prequalifyController'
                 }
             }

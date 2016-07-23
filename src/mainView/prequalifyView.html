@@ -1,6 +1,6 @@
 <form name="prequalifyController.myForm" ng-submit="prequalifyController.submitForm()" novalidate>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" required>
+    <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" size="35" required>
     <span style="color: red" ng-show="prequalifyController.myForm.firstName.$error.required && prequalifyController.formSubmitted">
       Please enter your first name
     </span>
@@ -32,7 +32,7 @@
   <div class="form-group">
     <input type="text" class="form-control" placeholder="yearStarted" name="yearStarted" ng-model="prequalifyController.userInfo.yearStarted" required>
     <span style="color: red" ng-show="prequalifyController.myForm.yearStarted.$error.required && prequalifyController.formSubmitted">
-      Please enter year started 
+      Please enter year started
     </span>
   </div>
   <div class="form-group">
@@ -64,9 +64,9 @@
   <div class="form-group">
     <input type="text" class="form-control" placeholder="api_key" name="api_key" ng-model="prequalifyController.userInfo.api_key" required>
     <span style="color: red" ng-show="prequalifyController.myForm.api_key.$error.required && prequalifyController.formSubmitted">
-      Please enter select your api_key
+      Please enter your api_key
     </span>
   </div>
-  <input type="submit" id="submit" value="Submit" class="form-control"/>
+  <input type="submit" id="submit" value="Submit" class="btn btn-primary"/>
   </div>
 </form>
