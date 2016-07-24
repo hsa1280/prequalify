@@ -17,17 +17,16 @@ class prequalifyController {
       this.QualifyAmount = response.data.QualifyAmount;
       this.RedirectUrl = response.data.RedirectUrl;
       //Change the name back
-      this.$state.go('qualified1');
+      this.$state.go('qualified');
     } else {
       //Change the name back
-      this.$state.go('unqualified1');
+      this.$state.go('unqualified');
     }
 
   }
 
   errorCallback(response) {
     console.log('error', response);
-    this.$state.go('unqualified');
   }
 
   submitForm() {

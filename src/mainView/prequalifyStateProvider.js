@@ -11,8 +11,8 @@ function prequalifyStateProvider($stateProvider) {
                 }
             }
         })
-        .state('qualified1', {
-			url: '/qualified1',
+        .state('qualified', {
+			url: '/qualified',
             views: {
                 'content': {
                     templateUrl: '/mainView/qualifiedView.html',
@@ -20,8 +20,8 @@ function prequalifyStateProvider($stateProvider) {
                 }
             }
         })
-        .state('unqualified1', {
-			url: '/unqualified1',
+        .state('unqualified', {
+			url: '/unqualified',
             views: {
                 'content': {
                     templateUrl: '/mainView/unqualifiedView.html',
