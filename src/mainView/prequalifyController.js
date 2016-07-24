@@ -5,12 +5,24 @@ class prequalifyController {
     this.$http = $http;
     this.$state = $state;
     this.formSubmitted = false;
-    this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering', 'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline', 'Construction', 'Dentists', 'DryCleaning', 'Equipment', 'Grocery', 'Health', 'HomeRepair', 'Hotels', 'Insurance', 'Janitorial', 'Landscape', 'Optometrists', 'Physicians', 'Restaurants', 'Salons', 'Taxis', 'Trucking', 'Veterinarians'];
+    this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering', 
+      'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline', 
+      'Construction', 'Dentists', 'DryCleaning', 'Equipment', 'Grocery', 'Health', 'HomeRepair', 
+      'Hotels', 'Insurance', 'Janitorial', 'Landscape', 'Optometrists', 'Physicians', 'Restaurants', 
+      'Salons', 'Taxis', 'Trucking', 'Veterinarians'];
   }
 
   successCallback(response) {
-    console.log('success', response);
-    this.$state.go('qualified');
+    if (response.data.Qualified) {
+      this.QualifyAmount = response.data.QualifyAmount;
+      this.RedirectUrl = response.data.RedirectUrl;
+      //Change the name back
+      this.$state.go('qualified1');
+    } else {
+      //Change the name back
+      this.$state.go('unqualified1');
+    }
+  
   }
 
   errorCallback(response) {
