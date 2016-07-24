@@ -5,10 +5,10 @@ class prequalifyController {
     this.$http = $http;
     this.$state = $state;
     this.formSubmitted = false;
-    this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering', 
-      'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline', 
-      'Construction', 'Dentists', 'DryCleaning', 'Equipment', 'Grocery', 'Health', 'HomeRepair', 
-      'Hotels', 'Insurance', 'Janitorial', 'Landscape', 'Optometrists', 'Physicians', 'Restaurants', 
+    this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering',
+      'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline',
+      'Construction', 'Dentists', 'DryCleaning', 'Equipment', 'Grocery', 'Health', 'HomeRepair',
+      'Hotels', 'Insurance', 'Janitorial', 'Landscape', 'Optometrists', 'Physicians', 'Restaurants',
       'Salons', 'Taxis', 'Trucking', 'Veterinarians'];
   }
 
@@ -22,7 +22,7 @@ class prequalifyController {
       //Change the name back
       this.$state.go('unqualified1');
     }
-  
+
   }
 
   errorCallback(response) {

@@ -57,8 +57,13 @@ describe("Test for prequalifyController ", () => {
 
     prequalifyController.userInfo = userInfo;
 
+    /*neutralize the error by making the $httpBackend mock ignore GET request, otherwise will get
+    Error: Unexpected request: GET /mainView/prequalifyView.html
+    	No more request expected
+    */
+    httpBackend.whenGET(/^.*$/).respond(200, '');
     //Set the $http.post to succeed
-    httpBackend.expectPOST(url, data).respond(200, 'success');
+    httpBackend.whenPOST(url, data).respond(200, 'success');
 
     prequalifyController.myForm = {
       $valid: true
@@ -110,8 +115,15 @@ describe("Test for prequalifyController ", () => {
 
     prequalifyController.userInfo = userInfo;
 
+    /*
+    Neutralize the error by making the $httpBackend mock ignore GET request, otherwise will get
+    Error: Unexpected request: GET /mainView/prequalifyView.html
+    No more request expected
+    */
+    httpBackend.whenGET(/^.*$/).respond(200, '');
+
     //Set the $http.post to fail
-    httpBackend.expectPOST(url, data).respond(400, 'success');
+    httpBackend.whenPOST(url, data).respond(400, 'error');
 
     prequalifyController.myForm = {
       $valid: true

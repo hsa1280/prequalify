@@ -1,6 +1,6 @@
 <form name="prequalifyController.myForm" ng-submit="prequalifyController.submitForm()" novalidate>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" size="35" required>
+    <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" required>
     <span style="color: red" ng-show="prequalifyController.myForm.firstName.$error.required && prequalifyController.formSubmitted">
       Please enter your first name
     </span>
@@ -54,9 +54,10 @@
     </span>
   </div>
   <select class="form-control" name="typeOfBusiness" ng-model="prequalifyController.userInfo.typeOfBusiness" required>
-    <option ng-repeat="option in prequalifyController.typeOfBusinessArr">
-      {{option}}
-    </option>
+      <option value="" disabled selected hidden>Please Choose a Business Type</option>
+       <option ng-repeat="option in prequalifyController.typeOfBusinessArr">
+         {{option}}
+       </option>
   </select>
   <span style="color: red" ng-show="prequalifyController.myForm.typeOfBusiness.$error.required && prequalifyController.formSubmitted">
     Please enter select a business type
