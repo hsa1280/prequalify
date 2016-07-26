@@ -1,4 +1,5 @@
 require('angular-mocks');
+import queryString from 'query-string';
 
 describe("Test for prequalifyController ", () => {
 
@@ -19,9 +20,14 @@ describe("Test for prequalifyController ", () => {
     });
   }));
 
+  it('test prequalifyController initialization', () => {
+    expect(prequalifyController.formSubmitted).toBeFalsy();
+    expect(prequalifyController.typeOfBusinessArr.length).toEqual(28);
+  });
+
   it('test submitForm function succeed', () => {
-    let url = 'http://api.kabbage.com/v2/prequalify',
-        data = {
+    let url = 'https://api.kabbage.com/v2/prequalify',
+        data = queryString.stringify({
           firstName: 'shian',
           lastName: 'huang',
           emailAddress: 'shian@gmail.com',
@@ -33,9 +39,10 @@ describe("Test for prequalifyController ", () => {
           grossPercentageFromCards: 85,
           typeOfBusiness: 'Accounting',
           api_key: 'abc'
-        },
+        }),
         headers = {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Cache-Control': 'no-cache'
         };
 
     let userInfo = {
@@ -72,14 +79,15 @@ describe("Test for prequalifyController ", () => {
     prequalifyController.submitForm();
     httpBackend.flush();
 
+    expect(prequalifyController.formSubmitted).toBeTruthy();
     expect(prequalifyController.successCallback).toHaveBeenCalled();
     expect(prequalifyController.errorCallback).not.toHaveBeenCalled();
 
   });
 
     it('test submitForm function failed', () => {
-    let url = 'http://api.kabbage.com/v2/prequalify',
-        data = {
+    let url = 'https://api.kabbage.com/v2/prequalify',
+        data = queryString.stringify({
           firstName: 'shian',
           lastName: 'huang',
           emailAddress: 'shian@gmail.com',
@@ -91,9 +99,10 @@ describe("Test for prequalifyController ", () => {
           grossPercentageFromCards: 85,
           typeOfBusiness: 'Accounting',
           api_key: 'abc'
-        },
+        }),
         headers = {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Cache-Control': 'no-cache'
         };
 
     let userInfo = {
@@ -132,7 +141,45 @@ describe("Test for prequalifyController ", () => {
     prequalifyController.submitForm();
     httpBackend.flush();
 
+    expect(prequalifyController.formSubmitted).toBeTruthy();
     expect(prequalifyController.successCallback).not.toHaveBeenCalled();
     expect(prequalifyController.errorCallback).toHaveBeenCalled();
+  });
+
+  it('test successCallback function when Qualified is true', ()=> {
+    spyOn(prequalifyController.$state, 'go');
+
+    let fakeReponse = {
+      data: {
+        Qualified: true,
+        QualifyAmount: 100,
+        RedirectUrl: 'https://api.kabbage.com/v2/prequalify'
+      }
+    };
+
+    let paramData = {
+      qualifiedAmount: 100,
+      redirectUrl: 'https://api.kabbage.com/v2/prequalify'
+    }
+
+    prequalifyController.successCallback(fakeReponse);
+
+    expect(prequalifyController.$state.go).toHaveBeenCalledWith('qualified', paramData);
+  });
+
+  it('test successCallback function when Qualified is false', ()=> {
+    spyOn(prequalifyController.$state, 'go');
+
+    let fakeReponse = {
+      data: {
+        Qualified: false,
+        QualifyAmount: 0,
+        RedirectUrl: null
+      }
+    };
+
+    prequalifyController.successCallback(fakeReponse);
+
+    expect(prequalifyController.$state.go).toHaveBeenCalledWith('unqualified');
   });
 });

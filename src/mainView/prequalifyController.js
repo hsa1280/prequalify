@@ -1,5 +1,7 @@
 const annotation = ['$http', '$state'];
 
+import queryString from 'query-string';
+
 class prequalifyController {
   constructor($http, $state) {
     this.$http = $http;
@@ -14,12 +16,8 @@ class prequalifyController {
 
   successCallback(response) {
     if (response.data.Qualified) {
-      this.QualifyAmount = response.data.QualifyAmount;
-      this.RedirectUrl = response.data.RedirectUrl;
-      //Change the name back
-      this.$state.go('qualified');
+      this.$state.go('qualified', {qualifiedAmount: response.data.QualifyAmount, redirectUrl: response.data.RedirectUrl});
     } else {
-      //Change the name back
       this.$state.go('unqualified');
     }
 
@@ -27,6 +25,7 @@ class prequalifyController {
 
   errorCallback(response) {
     console.log('error', response);
+    this.$state.go('error');
   }
 
   submitForm() {
@@ -34,11 +33,12 @@ class prequalifyController {
     if (this.myForm.$valid) {
       this.$http({
         method: 'POST',
-        url: 'http://api.kabbage.com/v2/prequalify',
+        url: 'https://api.kabbage.com/v2/prequalify',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Cache-Control': 'no-cache'
         },
-        data: {
+        data: queryString.stringify({
           firstName: this.userInfo.firstName,
           lastName: this.userInfo.lastName,
           emailAddress: this.userInfo.email,
@@ -48,9 +48,9 @@ class prequalifyController {
           estimatedFICO: this.userInfo.estimatedFICO,
           estimatedAnnualRevenue: this.userInfo.estimatedAnnualRevenue,
           grossPercentageFromCards: this.userInfo.grossPercentageFromCards,
-          typeOfBusiness: this.userInfo.typeOfBusiness,
+          typeOfBusiness: this.userInfo.typeOfBusiness.replace(/(\r\n|\n|\r)/gm,"").trim(),
           api_key: this.userInfo.api_key
-        }
+        })
       }).
       then(this.successCallback.bind(this), this.errorCallback.bind(this));
     }

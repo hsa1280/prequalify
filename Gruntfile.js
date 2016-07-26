@@ -24,5 +24,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-browserify');
 	grunt.registerTask('build', ['browserify']);
-	grunt.registerTask('test', ['karma']);
+	grunt.registerTask('test', ['browserify' ,'karma']);
 };

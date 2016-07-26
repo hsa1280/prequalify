@@ -11,17 +11,17 @@ function prequalifyStateProvider($stateProvider) {
                 }
             }
         })
-        .state('qualified', {
-			url: '/qualified',
+        .state('error', {
+			      url: '/error',
             views: {
                 'content': {
-                    templateUrl: '/mainView/qualifiedView.html',
-                    controller: 'prequalifyController as prequalifyController'
+                    templateUrl: '/mainView/error.html',
+                    controller: ''
                 }
             }
         })
         .state('unqualified', {
-			url: '/unqualified',
+			      url: '/unqualified',
             views: {
                 'content': {
                     templateUrl: '/mainView/unqualifiedView.html',

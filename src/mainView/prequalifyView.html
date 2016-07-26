@@ -1,4 +1,6 @@
+
 <form name="prequalifyController.myForm" ng-submit="prequalifyController.submitForm()" novalidate>
+  <h3>Prequalify Application Form</h3>
   <div class="form-group">
     <input type="text" class="form-control" placeholder="firstName" name="firstName" ng-model="prequalifyController.userInfo.firstName" required>
     <span style="color: red" ng-show="prequalifyController.myForm.firstName.$error.required && prequalifyController.formSubmitted">
@@ -62,6 +64,7 @@
   <span style="color: red" ng-show="prequalifyController.myForm.typeOfBusiness.$error.required && prequalifyController.formSubmitted">
     Please enter select a business type
   </span>
+  <br>
   <div class="form-group">
     <input type="text" class="form-control" placeholder="api_key" name="api_key" ng-model="prequalifyController.userInfo.api_key" required>
     <span style="color: red" ng-show="prequalifyController.myForm.api_key.$error.required && prequalifyController.formSubmitted">
