@@ -4,24 +4,16 @@ describe("Test for qualifiedController ", () => {
 
   beforeEach(angular.mock.module('prequalifyApp'));
 
-  let stateParams, controllerService, qualifiedController;
+  let controllerService, qualifiedController;
 
-  beforeEach(inject( ($controller, $stateParams) => {
-
-    stateParams = $stateParams;
-    stateParams = {
-      qualifiedAmount: 10000,
-      redirectUrl: 'https://api.kabbage.com/v2/prequalify'
-    }
+  beforeEach(inject( ($controller) => {
     controllerService = $controller;
 
-    qualifiedController = controllerService('qualifiedController', {
-      $stateParams: stateParams
-    });
+    qualifiedController = controllerService('qualifiedController', {});
   }));
 
   it('test qualifiedController initialization', () => {
-    expect(qualifiedController.qualifiedAmount).toEqual(10000);
+    expect(qualifiedController.qualifiedAmount).toEqual(100);
     expect(qualifiedController.redirectUrl).toEqual('https://api.kabbage.com/v2/prequalify');
   });
 

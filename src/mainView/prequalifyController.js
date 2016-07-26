@@ -1,11 +1,12 @@
-const annotation = ['$http', '$state'];
+const annotation = ['$http', '$state', 'localStorageService'];
 
 import queryString from 'query-string';
 
 class prequalifyController {
-  constructor($http, $state) {
+  constructor($http, $state, localStorageService) {
     this.$http = $http;
     this.$state = $state;
+    this.localStorageService = localStorageService;
     this.formSubmitted = false;
     this.typeOfBusinessArr = ['Accounting', 'Amusement', 'AutoRepair', 'BusinessServices', 'Catering',
       'ChildCare', 'ComputerServices', 'ConsumerGoodsRetailStore', 'ConsumerGoodsOnlineStore', 'ConsumerGoodsOnlineAndOffline',
@@ -16,7 +17,9 @@ class prequalifyController {
 
   successCallback(response) {
     if (response.data.Qualified) {
-      this.$state.go('qualified', {qualifiedAmount: response.data.QualifyAmount, redirectUrl: response.data.RedirectUrl});
+      this.localStorageService.set('qualifiedAmount', response.data.QualifyAmount);
+      this.localStorageService.set('redirectUrl', response.data.RedirectUrl);
+      this.$state.go('qualified');
     } else {
       this.$state.go('unqualified');
     }

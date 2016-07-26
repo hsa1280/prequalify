@@ -3,7 +3,7 @@ const annotation = ['$stateProvider'];
 function qualifiedStateProvider($stateProvider) {
     $stateProvider.
         state('qualified', {
-            url: '/qualified?qualifiedAmount&redirectUrl',
+            url: '/qualified',
             views: {
                 'content': {
                     templateUrl: '/qualifiedView/qualifiedView.html',

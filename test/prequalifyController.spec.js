@@ -5,18 +5,20 @@ describe("Test for prequalifyController ", () => {
 
   beforeEach(angular.mock.module('prequalifyApp'));
 
-  let state, http, controllerService, prequalifyController, httpBackend;
+  let state, http, controllerService, prequalifyController, httpBackend, $localStorageService;
 
-  beforeEach(inject( ($state, $controller, $http, $httpBackend ) => {
+  beforeEach(inject( ($state, $controller, $http, $httpBackend, _localStorageService_ ) => {
 
     state = $state;
     http = $http;
     controllerService = $controller;
     httpBackend = $httpBackend;
+    $localStorageService = _localStorageService_;
 
     prequalifyController = controllerService('prequalifyController', {
       $state: state,
-      $http: http
+      $http: http,
+      localStorageService: $localStorageService
     });
   }));
 
@@ -157,14 +159,11 @@ describe("Test for prequalifyController ", () => {
       }
     };
 
-    let paramData = {
-      qualifiedAmount: 100,
-      redirectUrl: 'https://api.kabbage.com/v2/prequalify'
-    }
-
     prequalifyController.successCallback(fakeReponse);
 
-    expect(prequalifyController.$state.go).toHaveBeenCalledWith('qualified', paramData);
+    expect(prequalifyController.localStorageService.get('qualifiedAmount')).toEqual(100);
+    expect(prequalifyController.localStorageService.get('redirectUrl')).toEqual('https://api.kabbage.com/v2/prequalify')
+    expect(prequalifyController.$state.go).toHaveBeenCalledWith('qualified');
   });
 
   it('test successCallback function when Qualified is false', ()=> {

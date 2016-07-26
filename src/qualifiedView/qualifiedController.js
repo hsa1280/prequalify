@@ -1,10 +1,9 @@
-const annotation = ['$stateParams'];
+const annotation = ['localStorageService'];
 
 class qualifiedController {
-  constructor($stateParams) {
-    this.$stateParams = $stateParams;
-    this.qualifiedAmount = this.$stateParams.qualifiedAmount;
-    this.redirectUrl = this.$stateParams.redirectUrl;
+  constructor(localStorageService) {
+    this.qualifiedAmount = localStorageService.get('qualifiedAmount');
+    this.redirectUrl = localStorageService.get('redirectUrl');
   }
 }
 
