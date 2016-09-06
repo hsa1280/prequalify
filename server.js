@@ -16,6 +16,7 @@ app.use(express.static('src/'));
 function performRequest(endpoint, method, data, success) {
   var headers = {};
 
+  //convert Javascript object or json to a query string
   var postData = querystring.stringify(data);
   headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -33,11 +34,8 @@ function performRequest(endpoint, method, data, success) {
   var req = https.request(options, function(res) {
     res.setEncoding('utf-8');
 
-    var responseString = '';
-
     res.on('data', function(data) {
-      responseString += data;
-      success(responseString);
+      success(data);
     });
 
     res.on('error', function(error) {
