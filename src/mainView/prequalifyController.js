@@ -34,26 +34,17 @@ class prequalifyController {
   submitForm() {
     this.formSubmitted = true;
     if (this.myForm.$valid) {
-      this.$http({
-        method: 'POST',
-        url: 'https://api.kabbage.com/v2/prequalify',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Cache-Control': 'no-cache'
-        },
-        data: queryString.stringify({
-          firstName: this.userInfo.firstName,
-          lastName: this.userInfo.lastName,
-          emailAddress: this.userInfo.email,
-          businessName: this.userInfo.businessName,
-          phoneNumber: this.userInfo.phoneNumber,
-          yearStarted: this.userInfo.yearStarted,
-          estimatedFICO: this.userInfo.estimatedFICO,
-          estimatedAnnualRevenue: this.userInfo.estimatedAnnualRevenue,
-          grossPercentageFromCards: this.userInfo.grossPercentageFromCards,
-          typeOfBusiness: this.userInfo.typeOfBusiness.replace(/(\r\n|\n|\r)/gm,"").trim(),
-          api_key: this.userInfo.api_key
-        })
+      this.$http.post('/data', {
+        firstName: this.userInfo.firstName,
+        lastName: this.userInfo.lastName,
+        emailAddress: this.userInfo.email,
+        businessName: this.userInfo.businessName,
+        phoneNumber: this.userInfo.phoneNumber,
+        yearStarted: this.userInfo.yearStarted,
+        estimatedFICO: this.userInfo.estimatedFICO,
+        estimatedAnnualRevenue: this.userInfo.estimatedAnnualRevenue,
+        grossPercentageFromCards: this.userInfo.grossPercentageFromCards,
+        typeOfBusiness: this.userInfo.typeOfBusiness.replace(/(\r\n|\n|\r)/gm,"").trim()
       }).
       then(this.successCallback.bind(this), this.errorCallback.bind(this));
     }
