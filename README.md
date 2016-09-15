@@ -13,3 +13,4 @@ key points summary:
 3. when using https.post(), we don't pass data in the url, we put it in the requet body.
 4. we need to use querystring.stringify(data) to convert coming request parameters to '&' string
 5. if we want to access to req.body, then we need to configure express server to do app.use(bodyParser.json()).
+6. Access-Control-Allow-Origin:*,  this makes all domains to access to this url 
