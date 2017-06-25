@@ -79,7 +79,7 @@ describe("Test for prequalifyController ", () => {
     };
 
     prequalifyController.submitForm();
-    httpBackend.flush();
+    // httpBackend.flush();
 
     expect(prequalifyController.formSubmitted).toBeTruthy();
     expect(prequalifyController.successCallback).toHaveBeenCalled();
@@ -141,7 +141,7 @@ describe("Test for prequalifyController ", () => {
     };
 
     prequalifyController.submitForm();
-    httpBackend.flush();
+    // httpBackend.flush();
 
     expect(prequalifyController.formSubmitted).toBeTruthy();
     expect(prequalifyController.successCallback).not.toHaveBeenCalled();
